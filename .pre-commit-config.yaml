@@ -1,0 +1,15 @@
+repos:
+  - repo: https://github.com/rotten/blue.git
+    rev: 0ef64a7a6ace12defedd4eb02f9f07ed7e831044
+    hooks:
+    - id: blue
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (python)
+        args: [--sp pyproject.toml]
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 5.0.4
+    hooks:
+      - id: flake8
