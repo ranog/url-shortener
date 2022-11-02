@@ -11,12 +11,6 @@ install-deps:
 	@pre-commit install
 	@pre-commit run --all-files
 
-poetry-export:
-	@poetry export --dev -vv --no-ansi --no-interaction --without-hashes --format requirements.txt --output requirements.txt
-
-lock-deps:
-	@poetry lock -vv --no-ansi --no-interaction
-
 .PHONY: isort
 isort:
 	@poetry run isort --sp pyproject.toml .
