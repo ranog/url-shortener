@@ -7,7 +7,7 @@ class UrlTemplate(BaseModel):
     url: HttpUrl
 
 
-def validate(url: str):
+async def validate(url: str):
     try:
         valid_url = UrlTemplate(url=url)
     except ValidationError:

@@ -11,6 +11,9 @@ async def root():
 
 @app.post('/v1/data/shorten/')
 async def shorten(json: dict):
+    # validador de URL      OK
+    # encurtador de URL     OK
+    # Salvar no database    NOK
     pass
 
 
