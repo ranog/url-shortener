@@ -11,6 +11,7 @@ python = "~3.10"
 fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
 pydantic = "^1.10.2"
+google-cloud-firestore = "^2.7.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"
