@@ -26,4 +26,4 @@ async def test_it_should_short_url_successfully(clean_collection, async_http_cli
     short_url = await shorten_url(url)
     response = await async_http_client.get(f'/v1/{short_url}/')
     assert response.status_code == 301
-    assert response.json() == url
+    assert response.headers['location'] == url
