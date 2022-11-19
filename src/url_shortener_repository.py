@@ -16,5 +16,4 @@ class UrlShortenerRepository:
 
     async def get(self, short_url: str):
         data = self.collection.where(field_path='short_url', op_string='==', value=short_url)
-        url_data = await data.get()
-        return url_data[0].to_dict()
+        return [url_data.to_dict() for url_data in await data.get()]

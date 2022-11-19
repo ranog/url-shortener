@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 
+from src.url_shortener_repository import UrlShortenerRepository
+from src.url_shortening import shorten_url
+from src.url_validator import validate
+
 
 app = FastAPI()
 
@@ -11,12 +15,13 @@ async def root():
 
 @app.post('/v1/data/shorten/')
 async def shorten(json: dict):
-    # validador de URL      OK
-    # encurtador de URL     OK
-    # Salvar no database    NOK
-    pass
+    url = json.get('long_url')
+    await validate(url)
+    await UrlShortenerRepository().add(url)
+    return await shorten_url(url)
 
 
 @app.get('/v1/{short_url}/', status_code=301)
 async def short(short_url: str):
-    pass
+    url_data = await UrlShortenerRepository().get(short_url)
+    return url_data[0]['long_url']
