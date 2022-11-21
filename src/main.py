@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
+from fastapi.responses import Response
 
 from src.url_shortener_repository import UrlShortenerRepository
 from src.url_shortening import shorten_url
@@ -16,13 +16,12 @@ async def root():
 
 @app.post('/v1/data/shorten/')
 async def shorten(json: dict):
-    url = json.get('long_url')
-    await validate(url)
-    await UrlShortenerRepository().add(url)
-    return await shorten_url(url)
+    long_url = json.get('long_url')
+    await validate(long_url)
+    await UrlShortenerRepository().add(long_url)
+    return await shorten_url(long_url)
 
 
 @app.get('/v1/{short_url}/', status_code=301)
 async def short(short_url: str):
-    url_data = await UrlShortenerRepository().get(short_url)
-    return RedirectResponse(url=url_data[0]['long_url'], status_code=301)
+    return Response(headers={'location': await UrlShortenerRepository().get_long_url(short_url)}, status_code=301)

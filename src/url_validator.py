@@ -1,15 +1,15 @@
 from pydantic import BaseModel, HttpUrl, ValidationError
 
-from src.exceptions import InvalidUrl
+from src.exceptions import LongUrlError
 
 
 class UrlTemplate(BaseModel):
     url: HttpUrl
 
 
-async def validate(url: str):
+async def validate(long_url: str):
     try:
-        valid_url = UrlTemplate(url=url)
+        valid_url = UrlTemplate(url=long_url)
     except ValidationError:
-        raise InvalidUrl(url)
+        raise LongUrlError(long_url)
     return valid_url.url

@@ -21,9 +21,9 @@ async def test_it_should_shorten_successfully(clean_collection, async_http_clien
 
 async def test_it_should_short_url_successfully(clean_collection, async_http_client: AsyncClient):
     await clean_collection(COLLECTION_NAME)
-    url = 'http://www.dummy.url.com'
-    await UrlShortenerRepository().add(url)
-    short_url = await shorten_url(url)
+    long_url = 'http://www.dummy.url.com'
+    await UrlShortenerRepository().add(long_url)
+    short_url = await shorten_url(long_url)
     response = await async_http_client.get(f'/v1/{short_url}/')
     assert response.status_code == 301
-    assert response.headers['location'] == url
+    assert response.headers['location'] == long_url
