@@ -1,6 +1,5 @@
 from google.cloud import firestore
 
-from src.exceptions import ShortUrlError
 from src.url_shortening import shorten_url
 
 
@@ -17,7 +16,6 @@ class UrlShortenerRepository:
 
     async def get_long_url(self, short_url: str):
         url_data = await self.collection.where(field_path='short_url', op_string='==', value=short_url).get()
-        try:
+        if url_data:
             return url_data[0].to_dict()['long_url']
-        except IndexError:
-            raise ShortUrlError(short_url)
+        return ''

@@ -27,3 +27,13 @@ async def test_it_should_short_url_successfully(clean_collection, async_http_cli
     response = await async_http_client.get(f'/v1/{short_url}/')
     assert response.status_code == 301
     assert response.headers['location'] == long_url
+
+
+async def test_it_should_return_status_code_404_when_the_short_url_does_not_exist_in_the_repository(
+    clean_collection,
+    async_http_client: AsyncClient,
+):
+    await clean_collection(COLLECTION_NAME)
+    short_url = await shorten_url('dummy_long_url')
+    response = await async_http_client.get(f'/v1/{short_url}/')
+    assert response.status_code == 404

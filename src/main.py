@@ -24,4 +24,7 @@ async def shorten(json: dict):
 
 @app.get('/v1/{short_url}/', status_code=301)
 async def short(short_url: str):
-    return Response(headers={'location': await UrlShortenerRepository().get_long_url(short_url)}, status_code=301)
+    url_shortener_repository = await UrlShortenerRepository().get_long_url(short_url)
+    if url_shortener_repository:
+        return Response(headers={'location': url_shortener_repository}, status_code=301)
+    return Response(status_code=404)
