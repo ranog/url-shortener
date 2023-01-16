@@ -11,8 +11,8 @@ https://github.com/pyenv/pyenv#installation
 ### instalar a versão 3.10.0 do python
 `pyenv install 3.10.0`
 
-### configurar versão 3.10.0 como global
-`pyenv global 3.10.0`
+### configurar versão 3.10.0 na sessão do terminal aberto
+`pyenv shell 3.10.0`
 
 ### instalar depêdencias do projeto
 `pip install --upgrade pip setuptools wheel poetry`
