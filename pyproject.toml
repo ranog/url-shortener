@@ -3,7 +3,7 @@ name = "url-shortener"
 version = "1.0.0"
 description = ""
 authors = [
-  "João Paulo Ramos Nogueira <joao.rnogueira@pagar.me>",
+  "João Paulo Ramos Nogueira <jprnogueira@yahoo.com.br>",
 ]
 
 [tool.poetry.dependencies]
